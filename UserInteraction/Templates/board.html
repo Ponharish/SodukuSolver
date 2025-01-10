@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        .heading {
+            text-align: center;
+        }
+        .form {
+            text-align: center;
+        }
+        .error {
+            text-align: center;
+            color: red;
+            font-size: 4px;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        td {
+            border: 1px solid black;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+        }
+        td input {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 18px;
+            border: none;
+            outline: none;
+        }
+        td:nth-child(3), td:nth-child(6) {
+            border-right: 3px solid black;
+        }
+        tr:nth-child(3) td, tr:nth-child(6) td {
+            border-bottom: 3px solid black;
+        }
+        input[type="submit"], button[type="submit"] {
+            margin: 7px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+        button[type="submit"] {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Animation for blinking effect */
+        @keyframes blinkRed {
+            0% { background-color: red; }
+            50% { background-color: transparent; }
+            100% { background-color: red; }
+        }
+
+        .blink-error {
+            animation: blinkRed 0.5s ease-in-out 2; /* Blinks red twice */
+        }
+
+        @keyframes blinkGreen {
+            0% { background-color: green; }
+            50% { background-color: transparent; }
+            100% { background-color: green; }
+        }
+
+        .blink-success {
+            animation: blinkGreen 0.5s ease-in-out 2; /* Blinks green twice */
+        }
+    </style>
+
+    <head>
+        <title>Sudoku Solver</title>
+    </head>
+
+    <body>
+        <div class="heading">
+            <h1>Sudoku Solver</h1><br><br>
+        </div>
+
+        <div class="form">
+            <form method="post" id="sudokuForm">
+                {% csrf_token %}
+                <table cellpadding="5" class="{% if form_submitted_successfully %}blink-success{% elif form.errors %}blink-error{% endif %}">
+                    <tr>
+                        <td>{{ form.r1c1 }}</td>
+                        <td>{{ form.r1c2 }}</td>
+                        <td>{{ form.r1c3 }}</td>
+                        <td>{{ form.r1c4 }}</td>
+                        <td>{{ form.r1c5 }}</td>
+                        <td>{{ form.r1c6 }}</td>
+                        <td>{{ form.r1c7 }}</td>
+                        <td>{{ form.r1c8 }}</td>
+                        <td>{{ form.r1c9 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.r2c1 }}</td>
+                        <td>{{ form.r2c2 }}</td>
+                        <td>{{ form.r2c3 }}</td>
+                        <td>{{ form.r2c4 }}</td>
+                        <td>{{ form.r2c5 }}</td>
+                        <td>{{ form.r2c6 }}</td>
+                        <td>{{ form.r2c7 }}</td>
+                        <td>{{ form.r2c8 }}</td>
+                        <td>{{ form.r2c9 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.r3c1 }}</td>
+                        <td>{{ form.r3c2 }}</td>
+                        <td>{{ form.r3c3 }}</td>
+                        <td>{{ form.r3c4 }}</td>
+                        <td>{{ form.r3c5 }}</td>
+                        <td>{{ form.r3c6 }}</td>
+                        <td>{{ form.r3c7 }}</td>
+                        <td>{{ form.r3c8 }}</td>
+                        <td>{{ form.r3c9 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.r4c1 }}</td>
+                        <td>{{ form.r4c2 }}</td>
+                        <td>{{ form.r4c3 }}</td>
+                        <td>{{ form.r4c4 }}</td>
+                        <td>{{ form.r4c5 }}</td>
+                        <td>{{ form.r4c6 }}</td>
+                        <td>{{ form.r4c7 }}</td>
+                        <td>{{ form.r4c8 }}</td>
+                        <td>{{ form.r4c9 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.r5c1 }}</td>
+                        <td>{{ form.r5c2 }}</td>
+                        <td>{{ form.r5c3 }}</td>
+                        <td>{{ form.r5c4 }}</td>
+                        <td>{{ form.r5c5 }}</td>
+                        <td>{{ form.r5c6 }}</td>
+                        <td>{{ form.r5c7 }}</td>
+                        <td>{{ form.r5c8 }}</td>
+                        <td>{{ form.r5c9 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.r6c1 }}</td>
+                        <td>{{ form.r6c2 }}</td>
+                        <td>{{ form.r6c3 }}</td>
+                        <td>{{ form.r6c4 }}</td>
+                        <td>{{ form.r6c5 }}</td>
+                        <td>{{ form.r6c6 }}</td>
+                        <td>{{ form.r6c7 }}</td>
+                        <td>{{ form.r6c8 }}</td>
+                        <td>{{ form.r6c9 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.r7c1 }}</td>
+                        <td>{{ form.r7c2 }}</td>
+                        <td>{{ form.r7c3 }}</td>
+                        <td>{{ form.r7c4 }}</td>
+                        <td>{{ form.r7c5 }}</td>
+                        <td>{{ form.r7c6 }}</td>
+                        <td>{{ form.r7c7 }}</td>
+                        <td>{{ form.r7c8 }}</td>
+                        <td>{{ form.r7c9 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.r8c1 }}</td>
+                        <td>{{ form.r8c2 }}</td>
+                        <td>{{ form.r8c3 }}</td>
+                        <td>{{ form.r8c4 }}</td>
+                        <td>{{ form.r8c5 }}</td>
+                        <td>{{ form.r8c6 }}</td>
+                        <td>{{ form.r8c7 }}</td>
+                        <td>{{ form.r8c8 }}</td>
+                        <td>{{ form.r8c9 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.r9c1 }}</td>
+                        <td>{{ form.r9c2 }}</td>
+                        <td>{{ form.r9c3 }}</td>
+                        <td>{{ form.r9c4 }}</td>
+                        <td>{{ form.r9c5 }}</td>
+                        <td>{{ form.r9c6 }}</td>
+                        <td>{{ form.r9c7 }}</td>
+                        <td>{{ form.r9c8 }}</td>
+                        <td>{{ form.r9c9 }}</td>
+                    </tr>
+                </table>
+                <br><br>
+                <input type="submit" name="Solve" value="Solve">
+                <button type="submit" name="reset" onclick="return confirmReset()">Reset</button>
+                
+            </form>
+        </div>
+
+        <div class="error">
+            {% if form.errors %}
+            <br><br>
+            {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+            <p><font size="4">{{ error }}</font></p>
+            {% endfor %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+    <script>
+        function confirmReset() {
+            return confirm("Are you sure you want to reset the Sudoku board?");
+        }
+    </script>
+</html>
